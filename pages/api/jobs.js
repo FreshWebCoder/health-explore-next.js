@@ -6,7 +6,8 @@ import jobs from '../../data/jobs.json';
 export default async function getJobs(req, res) {
   let query = {
     keyword: '',
-    filters: {}
+    filters: {},
+    sort: {}
   };
 
   try {
@@ -53,6 +54,18 @@ export default async function getJobs(req, res) {
 
     });
 
+    Object.keys(query.sort).map(s => {
+      if (query.sort[s] === 'asc') {
+        found = found.orderBy(el => {
+          return el[s];
+        });
+      } else {
+        found = found.orderByDescending(el => {
+          return el[s];
+        });
+      }
+    });
+
     if (found.count()) {      
       results.push({
         ...job,        
@@ -68,4 +81,6 @@ export default async function getJobs(req, res) {
   await new Promise((resolve)=>setTimeout(resolve, 1000 * Math.random())); 
   
   res.json(results)
+
+  return results;
 }
