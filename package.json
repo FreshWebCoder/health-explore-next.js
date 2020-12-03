@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "cross-env NODE_PATH=src next dev",
-    "build": "cross-env NODE_PATH=src next build && cross-env NODE_PATH=src next export",
+    "build": "npm run build-css && cross-env NODE_PATH=src next build && cross-env NODE_PATH=src next export",
+    "build-css": "tailwind build ./styles/globals.css -c ./tailwind.config.js -o ./styles/globals.css",
     "postbuild": "next-on-netlify",
     "start": "next start",
     "test": "cross-env NODE_ENV=test jest --testTimeout=10000"
