@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "cross-env NODE_PATH=src next dev",
-    "build": "next build",
+    "build": "cross-env NODE_PATH=src next build",
     "start": "next start",
     "test": "cross-env NODE_ENV=test jest --testTimeout=10000"
   },
